@@ -1,0 +1,6 @@
+framework module Pods_ScoutiumTestTests {
+  umbrella header "Pods-ScoutiumTestTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
