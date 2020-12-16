@@ -31,7 +31,7 @@
          
         
          // Makes 3 Seconds delay for spinner animation
-         DispatchQueue.main.asyncAfter(deadline:.now() + 5.0, execute: {
+         DispatchQueue.main.asyncAfter(deadline:.now() + 3.0, execute: {
              self.spinner.stopAnimating() // stops spinner
              self.spinner.hidesWhenStopped = true // hides spinner
              self.tableView.isHidden = false // shows tableView
