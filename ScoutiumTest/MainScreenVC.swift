@@ -24,19 +24,20 @@
          tableView.dataSource = self
          tableView.isHidden = true // hides tableView while spinner works
          spinner.startAnimating() // starts spinner
-        
-         // Makes 3 Seconds delay for spinner animation
-         DispatchQueue.main.asyncAfter(deadline:.now() + 3.0, execute: {
-             self.spinner.stopAnimating() // stops spinner
-             self.spinner.hidesWhenStopped = true // hides spinner
-             self.tableView.isHidden = false // shows tableView
-         })
-         
         // Starts downloadJSON functions and loads the JSON data
          downloadJSON {
            self.tableView.reloadData()
           }
-         }
+         
+        
+         // Makes 3 Seconds delay for spinner animation
+         DispatchQueue.main.asyncAfter(deadline:.now() + 5.0, execute: {
+             self.spinner.stopAnimating() // stops spinner
+             self.spinner.hidesWhenStopped = true // hides spinner
+             self.tableView.isHidden = false // shows tableView
+         })
+     }
+        
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return jsonStats.count // count of variable in Json Data "items"
@@ -45,7 +46,11 @@
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! CustomTableViewCell // reference the CustomTableViewCell
         cell.titleLabel.text = jsonStats[indexPath.row].title.capitalized // loads the title string data from JsonStats struct
-        cell.cellView.layer.cornerRadius = 50
+        cell.cellView.layer.cornerRadius = 10
+        var urlData = jsonStats[indexPath.row].url
+        urlData = "https://storage.googleapis.com/anvato-sample-dataset-nl-au-s1/life-1/" + urlData
+        let url = URL(string: urlData)
+        cell.logoImage.downloaded(from: url!)
         return cell
         }
     
@@ -98,6 +103,7 @@
             destination.item = jsonStats[(tableView.indexPathForSelectedRow?.row)!]
         }
     }
+    
     
     
 }
