@@ -51,6 +51,9 @@
         urlData = "https://storage.googleapis.com/anvato-sample-dataset-nl-au-s1/life-1/" + urlData
         let url = URL(string: urlData)
         cell.logoImage.downloaded(from: url!)
+        cell.logoImage.layer.cornerRadius = 10
+        cell.logoImage.contentMode = UIView.ContentMode.scaleAspectFill;
+        cell.logoImage.layer.masksToBounds = true
         return cell
         }
     
